@@ -1,0 +1,13 @@
+version: '3'
+# docker compose up -d
+# docker compose stop
+
+services:
+  api-solid-pg:
+    image: bitnami/postgresql
+    ports:
+      - 5430:5432
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=dietapisolid
