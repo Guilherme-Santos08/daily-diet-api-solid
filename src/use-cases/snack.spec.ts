@@ -1,6 +1,6 @@
+import { InMemorySnackRepository } from '@/repositories/in-memory/in-memory-snack-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { InMemorySnackRepository } from './repositories/in-memory/in-memory-snack-repository'
-import { SnackUseCase } from './use-cases/snack'
+import { SnackUseCase } from './snack'
 
 let snackRepository: InMemorySnackRepository
 let sut: SnackUseCase
