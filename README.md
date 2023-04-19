@@ -5,7 +5,7 @@ Daily Diet app.
 ## RFs (Requisitos funcionais)
 - [x] Deve ser possível se cadastrar;
 - [x] Deve ser possível se autenticar;
-- [x] Deve ser possível obter o perfil de um usuário logado;
+- [ ] Deve ser possível obter o perfil de um usuário logado;
 - [ ] Deve ser possível registrar uma refeição feita, com as seguintes informações;
       *As refeições devem ser relacionadas a um usuário.*
       - [ ] Nome
