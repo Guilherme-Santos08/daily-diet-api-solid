@@ -17,7 +17,7 @@ describe('Snack be able to check in', async () => {
   })
 
   it('should be able to register snack', async () => {
-    const { snack } = await sut.execute({
+    const { snack } = await sut.createSnack({
       name: 'Macarrão',
       description: 'Macarrão ao melho bombole',
       insideDiet: true,
@@ -28,7 +28,7 @@ describe('Snack be able to check in', async () => {
   })
 
   it('should be able to edit snack', async () => {
-    const { snack: createdSnack } = await sut.execute({
+    const { snack: createdSnack } = await sut.createSnack({
       name: 'Macarrão',
       description: 'Macarrão ao melho bombole',
       insideDiet: true,
@@ -52,7 +52,7 @@ describe('Snack be able to check in', async () => {
   })
 
   it('should not be able to edit snack with user_id wrong', async () => {
-    const { snack: createdSnack } = await sut.execute({
+    const { snack: createdSnack } = await sut.createSnack({
       name: 'Macarrão',
       description: 'Macarrão ao melho bombole',
       insideDiet: true,
@@ -71,7 +71,7 @@ describe('Snack be able to check in', async () => {
   })
 
   it('should not be able to edit snack with id wrong', async () => {
-    await sut.execute({
+    await sut.createSnack({
       name: 'Macarrão',
       description: 'Macarrão ao melho bombole',
       insideDiet: true,

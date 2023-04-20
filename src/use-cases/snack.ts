@@ -16,7 +16,7 @@ interface SnackUseCaseResponse {
 export class SnackUseCase {
   constructor(private snackRepository: SnackRepository) {}
 
-  async execute({
+  async createSnack({
     name,
     description,
     insideDiet,
