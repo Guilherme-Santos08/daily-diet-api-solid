@@ -2,12 +2,21 @@ import { randomUUID } from 'node:crypto'
 import { Prisma, Snack } from '@prisma/client'
 
 import { SnackNotFound } from '@/use-cases/errors/snack-not-found'
-import { UseNotAuthorizedEdit } from '@/use-cases/errors/user-not-authorized-edit'
 
 import { SnackRepository } from '../snacks-repository'
 
 export class InMemorySnackRepository implements SnackRepository {
   public items: Snack[] = []
+
+  async findById(snackId: string) {
+    const snack = this.items.find((item) => item.id === snackId)
+
+    if (!snack) {
+      throw new SnackNotFound()
+    }
+
+    return snack
+  }
 
   async create(data: Prisma.SnackUncheckedCreateInput) {
     const snack = {
@@ -25,15 +34,11 @@ export class InMemorySnackRepository implements SnackRepository {
     return snack
   }
 
-  async edit(data: Prisma.SnackUncheckedUpdateInput) {
+  async edit(data: Snack) {
     const snackIndex = this.items.findIndex((snack) => snack.id === data.id)
 
     if (snackIndex === -1) {
       throw new SnackNotFound()
-    }
-
-    if (this.items[snackIndex].user_id !== data.user_id) {
-      throw new UseNotAuthorizedEdit()
     }
 
     const updatedSnack = {
@@ -48,5 +53,9 @@ export class InMemorySnackRepository implements SnackRepository {
     this.items[snackIndex] = updatedSnack
 
     return updatedSnack
+  }
+
+  async delete(snackId: string) {
+    this.items = this.items.filter((snack) => snack.id !== snackId)
   }
 }

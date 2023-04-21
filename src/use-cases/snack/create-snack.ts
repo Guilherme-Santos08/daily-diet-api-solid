@@ -1,48 +1,27 @@
 import { SnackRepository } from '@/repositories/snacks-repository'
 import { Snack } from '@prisma/client'
 
-interface SnackUseCaseRequest {
-  id?: string
+interface SnackCreateUseCaseRequest {
   userId: string
   name: string
   description: string
   insideDiet: boolean
 }
 
-interface SnackUseCaseResponse {
+interface SnackCreateUseCaseResponse {
   snack: Snack
 }
 
-export class SnackUseCase {
+export class SnackCreateUseCase {
   constructor(private snackRepository: SnackRepository) {}
 
-  async createSnack({
+  async execute({
     name,
     description,
     insideDiet,
     userId,
-  }: SnackUseCaseRequest): Promise<SnackUseCaseResponse> {
+  }: SnackCreateUseCaseRequest): Promise<SnackCreateUseCaseResponse> {
     const snack = await this.snackRepository.create({
-      user_id: userId,
-      name,
-      description,
-      insideDiet,
-    })
-
-    return {
-      snack,
-    }
-  }
-
-  async updateSnack({
-    id,
-    name,
-    description,
-    insideDiet,
-    userId,
-  }: SnackUseCaseRequest) {
-    const snack = await this.snackRepository.edit({
-      id,
       user_id: userId,
       name,
       description,
