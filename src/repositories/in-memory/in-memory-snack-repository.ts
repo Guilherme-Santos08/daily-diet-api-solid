@@ -18,6 +18,16 @@ export class InMemorySnackRepository implements SnackRepository {
     return snack
   }
 
+  async findManyByUserId(userId: string) {
+    const snackMany = this.items.filter((item) => item.user_id === userId)
+
+    if (!snackMany) {
+      throw new SnackNotFound()
+    }
+
+    return snackMany
+  }
+
   async create(data: Prisma.SnackUncheckedCreateInput) {
     const snack = {
       id: randomUUID(),
