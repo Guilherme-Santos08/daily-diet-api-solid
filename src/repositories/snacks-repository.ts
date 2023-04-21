@@ -6,4 +6,5 @@ export interface SnackRepository {
   delete(snackId: string): Promise<void>
   findManyByUserId(userId: string): Promise<Snack[]>
   findById(snackId: string): Promise<Snack>
+  getUserMetrics(userId: string): Promise<any>
 }
