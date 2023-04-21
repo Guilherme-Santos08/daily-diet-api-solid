@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import { InMemorySnackRepository } from '@/repositories/in-memory/in-memory-snack-repository'
-import { SnackGetAllUserUseCase } from './get-all-user-snacks copy'
 import { SnackNotFound } from '../errors/snack-not-found'
+import { SnackGetAllUserUseCase } from './get-all-user-snacks'
 
 let snackRepository: InMemorySnackRepository
 let sut: SnackGetAllUserUseCase
