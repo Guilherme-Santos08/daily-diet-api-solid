@@ -18,4 +18,5 @@
     "editor.autoClosingBrackets": "always",
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "files.eol": "\n",
 }

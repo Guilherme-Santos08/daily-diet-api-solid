@@ -1,5 +1,5 @@
-export class UseNotAuthorizedEdit extends Error {
+export class UseNotAuthorized extends Error {
   constructor() {
-    super('User not authorized to edit this snack.')
+    super('Unauthorized user.')
   }
 }

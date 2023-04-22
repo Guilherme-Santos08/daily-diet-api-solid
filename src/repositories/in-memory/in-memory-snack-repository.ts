@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 import { Prisma, Snack } from '@prisma/client'
 
 import { SnackNotFound } from '@/use-cases/errors/snack-not-found'
+import { UseNotAuthorized } from '@/use-cases/errors/user-not-authorized-edit'
 
 import { SnackRepository } from '../snacks-repository'
 
@@ -41,11 +42,15 @@ function getBestSequence(snacks: Snack[]) {
 export class InMemorySnackRepository implements SnackRepository {
   public items: Snack[] = []
 
-  async findById(snackId: string) {
+  async findById(snackId: string, userId: string) {
     const snack = this.items.find((item) => item.id === snackId)
 
     if (!snack) {
       throw new SnackNotFound()
+    }
+
+    if (snack.user_id !== userId) {
+      throw new UseNotAuthorized()
     }
 
     return snack
@@ -95,20 +100,25 @@ export class InMemorySnackRepository implements SnackRepository {
   }
 
   async edit(data: Snack) {
-    const snackIndex = this.items.findIndex((snack) => snack.id === data.id)
+    const snack = this.items.find((snack) => snack.id === data.id)
 
-    if (snackIndex === -1) {
+    if (!snack) {
       throw new SnackNotFound()
     }
 
+    if (snack?.user_id !== data.user_id) {
+      throw new UseNotAuthorized()
+    }
+
     const updatedSnack = {
-      ...this.items[snackIndex],
-      name: String(data.name) ?? this.items[snackIndex].name,
-      description:
-        String(data.description) ?? this.items[snackIndex].description,
-      insideDiet: Boolean(data.insideDiet) ?? this.items[snackIndex].insideDiet,
+      ...snack,
+      name: data.name ?? snack.name,
+      description: data.description ?? snack.description,
+      insideDiet: data.insideDiet ?? snack.insideDiet,
       updated_at: new Date(),
     }
+
+    const snackIndex = this.items.findIndex((snack) => snack.id === data.id)
 
     this.items[snackIndex] = updatedSnack
 

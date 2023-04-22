@@ -3,6 +3,7 @@ import { Snack } from '@prisma/client'
 
 interface SnackGetOnlyUseCaseRequest {
   snackId: string
+  userId: string
 }
 
 interface SnackGetOnlyUseCaseResponse {
@@ -14,8 +15,9 @@ export class SnackGetOnlyUseCase {
 
   async execute({
     snackId,
+    userId,
   }: SnackGetOnlyUseCaseRequest): Promise<SnackGetOnlyUseCaseResponse> {
-    const snack = await this.snackRepository.findById(snackId)
+    const snack = await this.snackRepository.findById(snackId, userId)
 
     return {
       snack,

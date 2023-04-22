@@ -1,5 +1,6 @@
 import { InMemorySnackRepository } from '@/repositories/in-memory/in-memory-snack-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
+import { UseNotAuthorized } from '../errors/user-not-authorized-edit'
 import { SnackEditUseCase } from './edit-snack'
 
 let snackRepository: InMemorySnackRepository
@@ -35,5 +36,26 @@ describe('User be able edit snack', async () => {
     expect(updatedSnack.description).toEqual('Pizza de queijo')
     expect(updatedSnack.insideDiet).toEqual(false)
     expect(updatedSnack.updated_at).toEqual(expect.any(Date))
+  })
+
+  it('should throw an error if user is not authorized to edit snack', async () => {
+    const createdSnack = await snackRepository.create({
+      id: 'snack-01',
+      name: 'Macarrão',
+      description: 'Macarrão ao melho bombole',
+      created_at: new Date(),
+      insideDiet: false,
+      user_id: 'user-01',
+    })
+
+    await expect(
+      sut.execute({
+        id: createdSnack.id,
+        name: 'Pizza',
+        description: 'Pizza de queijo',
+        insideDiet: false,
+        user_id: 'user-02',
+      }),
+    ).rejects.toThrow(UseNotAuthorized)
   })
 })
