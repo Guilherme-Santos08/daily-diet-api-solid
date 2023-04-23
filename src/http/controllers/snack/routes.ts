@@ -17,5 +17,5 @@ export async function snacksRoutes(app: FastifyInstance) {
 
   app.get('/snacks/get-all-user-snack/:userId', getAllUserSnack)
   app.get('/snacks/get-user-metrics/:userId', getUserMetrics)
-  app.get('/snacks/get-only-snack', getOnlySnack)
+  app.get('/snacks/get-only-snack/:snackId', getOnlySnack)
 }

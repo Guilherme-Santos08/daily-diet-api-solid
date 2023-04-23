@@ -6,17 +6,16 @@ export async function getOnlySnack(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const getOnlySnackBodySchema = z.object({
-    id: z.string().uuid(),
+  const getOnlySnackParamsSchema = z.object({
+    snackId: z.string().uuid(),
   })
 
-  const { id } = getOnlySnackBodySchema.parse(request.body)
+  const { snackId } = getOnlySnackParamsSchema.parse(request.params)
 
   const getOnlySnackUseCase = makeGetOnlySnackUseCase()
 
   const { snack } = await getOnlySnackUseCase.execute({
-    snackId: id,
-    userId: request.user.sub,
+    snackId,
   })
 
   return reply.status(200).send({ snack })

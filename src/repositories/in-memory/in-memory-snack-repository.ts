@@ -10,15 +10,11 @@ import { getBestSequence } from '@/utils/getBestSequence'
 export class InMemorySnackRepository implements SnackRepository {
   public items: Snack[] = []
 
-  async findById(snackId: string, userId: string) {
+  async findById(snackId: string) {
     const snack = this.items.find((item) => item.id === snackId)
 
     if (!snack) {
       throw new SnackNotFound()
-    }
-
-    if (snack.user_id !== userId) {
-      throw new UseNotAuthorized()
     }
 
     return snack

@@ -47,11 +47,10 @@ export class PrismaSnacksRepository implements SnackRepository {
     return snacks
   }
 
-  async findById(snackId: string, userId: string) {
+  async findById(snackId: string) {
     const snacks = await prisma.snack.findFirst({
       where: {
         id: snackId,
-        user_id: userId,
       },
     })
 

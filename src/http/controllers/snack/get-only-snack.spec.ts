@@ -14,7 +14,7 @@ describe('User get only snacks (e2e)', () => {
     await app.close()
   })
 
-  it.skip('should be able get a snack', async () => {
+  it('should be able get a snack', async () => {
     const { token } = await createAndAuthenticateUser(app)
 
     const user = await prisma.user.findFirstOrThrow()
@@ -28,12 +28,10 @@ describe('User get only snacks (e2e)', () => {
       },
     })
 
-    const response = await request(app)
-      .get('/snacks/get-only-snack')
+    const response = await request(app.server)
+      .get(`/snacks/get-only-snack/${snack.id}`)
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        id: snack.id,
-      })
+      .send()
 
     expect(response.statusCode).toEqual(200)
   })
