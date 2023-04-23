@@ -29,11 +29,9 @@ describe('Delete snacks (e2e)', () => {
     })
 
     const response = await request(app.server)
-      .delete('/snacks/delete')
+      .delete(`/snacks/delete/${snack.id}`)
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        id: snack.id,
-      })
+      .send()
 
     expect(response.statusCode).toEqual(200)
   })

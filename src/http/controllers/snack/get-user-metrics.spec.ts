@@ -3,6 +3,7 @@ import request from 'supertest'
 import { app } from '@/app'
 
 import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
+import { prisma } from '@/lib/prisma'
 
 describe('Get all user metrics (e2e)', () => {
   beforeAll(async () => {
@@ -15,6 +16,8 @@ describe('Get all user metrics (e2e)', () => {
 
   it('should be able to get all metrics', async () => {
     const { token } = await createAndAuthenticateUser(app)
+
+    const user = await prisma.user.findFirstOrThrow()
 
     for (let index = 0; index < 10; index += 1) {
       await request(app.server)
@@ -39,7 +42,7 @@ describe('Get all user metrics (e2e)', () => {
     }
 
     const response = await request(app.server)
-      .get('/snacks/get-user-metrics')
+      .get(`/snacks/get-user-metrics/${user.id}`)
       .set('Authorization', `Bearer ${token}`)
       .send()
 

@@ -7,14 +7,14 @@ export async function deleteSnack(
   reply: FastifyReply,
 ) {
   const deleteSnackBodySchema = z.object({
-    id: z.string().uuid(),
+    snackId: z.string().uuid(),
   })
 
-  const { id } = deleteSnackBodySchema.parse(request.body)
+  const { snackId } = deleteSnackBodySchema.parse(request.params)
 
   const deleteUseCase = makeDeleteSnackUseCase()
 
-  await deleteUseCase.execute({ snackId: id })
+  await deleteUseCase.execute({ snackId })
 
   return reply.status(200).send()
 }

@@ -12,10 +12,10 @@ export async function snacksRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJwt)
 
   app.post('/snacks', create)
-  app.put('/snacks/edit', edit)
-  app.delete('/snacks/delete', deleteSnack)
+  app.put('/snacks/edit/:snackId', edit)
+  app.delete('/snacks/delete/:snackId', deleteSnack)
 
-  app.get('/snacks/get-all-user-snack', getAllUserSnack)
-  app.get('/snacks/get-user-metrics', getUserMetrics)
+  app.get('/snacks/get-all-user-snack/:userId', getAllUserSnack)
+  app.get('/snacks/get-user-metrics/:userId', getUserMetrics)
   app.get('/snacks/get-only-snack', getOnlySnack)
 }

@@ -3,21 +3,25 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
 export async function edit(request: FastifyRequest, reply: FastifyReply) {
+  const editSnackParamsSchema = z.object({
+    snackId: z.string().uuid(),
+  })
+
   const editSnackBodySchema = z.object({
-    id: z.string().uuid(),
     name: z.string(),
     description: z.string(),
     insideDiet: z.boolean(),
   })
 
-  const { name, description, insideDiet, id } = editSnackBodySchema.parse(
+  const { snackId } = editSnackParamsSchema.parse(request.params)
+  const { name, description, insideDiet } = editSnackBodySchema.parse(
     request.body,
   )
 
   const editSnackUseCase = makeEditSnackUseCase()
 
   const { snack } = await editSnackUseCase.execute({
-    id,
+    id: snackId,
     name,
     description,
     insideDiet,

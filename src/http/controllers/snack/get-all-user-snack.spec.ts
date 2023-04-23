@@ -3,6 +3,7 @@ import request from 'supertest'
 import { app } from '@/app'
 
 import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
+import { prisma } from '@/lib/prisma'
 
 describe('Get all snacks (e2e)', () => {
   beforeAll(async () => {
@@ -15,6 +16,8 @@ describe('Get all snacks (e2e)', () => {
 
   it('should be able to get all snack', async () => {
     const { token } = await createAndAuthenticateUser(app)
+
+    const user = await prisma.user.findFirstOrThrow()
 
     await request(app.server)
       .post('/snacks')
@@ -35,7 +38,7 @@ describe('Get all snacks (e2e)', () => {
       })
 
     const response = await request(app.server)
-      .get('/snacks/get-all-user-snack')
+      .get(`/snacks/get-all-user-snack/${user.id}`)
       .set('Authorization', `Bearer ${token}`)
       .send()
 

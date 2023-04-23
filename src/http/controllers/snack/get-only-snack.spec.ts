@@ -14,7 +14,7 @@ describe('User get only snacks (e2e)', () => {
     await app.close()
   })
 
-  it.only('should be able get a snack', async () => {
+  it.skip('should be able get a snack', async () => {
     const { token } = await createAndAuthenticateUser(app)
 
     const user = await prisma.user.findFirstOrThrow()

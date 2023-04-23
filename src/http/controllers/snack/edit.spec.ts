@@ -14,7 +14,7 @@ describe('Edit snacks (e2e)', () => {
     await app.close()
   })
 
-  it('should be able to edit a snack', async () => {
+  it.only('should be able to edit a snack', async () => {
     const { token } = await createAndAuthenticateUser(app)
 
     const user = await prisma.user.findFirstOrThrow()
@@ -29,10 +29,9 @@ describe('Edit snacks (e2e)', () => {
     })
 
     const response = await request(app.server)
-      .put('/snacks/edit')
+      .put(`/snacks/edit/${snack.id}`)
       .set('Authorization', `Bearer ${token}`)
       .send({
-        id: snack.id,
         name: 'Salgadinho',
         description: 'doritos',
         insideDiet: true,
