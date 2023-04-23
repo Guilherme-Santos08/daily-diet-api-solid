@@ -7,7 +7,7 @@ interface SnackGetOnlyUseCaseRequest {
 }
 
 interface SnackGetOnlyUseCaseResponse {
-  snack: Snack
+  snack: Snack | null
 }
 
 export class SnackGetOnlyUseCase {

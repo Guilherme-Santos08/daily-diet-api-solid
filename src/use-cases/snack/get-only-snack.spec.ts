@@ -27,7 +27,7 @@ describe('User be able to get only snacks', async () => {
       userId: 'user-01',
     })
 
-    expect(createdSnack.id).toEqual(snack.id)
+    expect(createdSnack.id).toEqual(snack?.id)
   })
 
   it('should not be able to get all snack', async () => {

@@ -13,7 +13,7 @@ describe('Get all user metrics (e2e)', () => {
     await app.close()
   })
 
-  it.only('should be able to get all metrics', async () => {
+  it('should be able to get all metrics', async () => {
     const { token } = await createAndAuthenticateUser(app)
 
     for (let index = 0; index < 10; index += 1) {

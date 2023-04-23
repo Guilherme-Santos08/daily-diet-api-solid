@@ -13,7 +13,7 @@ describe('Get all snacks (e2e)', () => {
     await app.close()
   })
 
-  it.only('should be able to get all snack', async () => {
+  it('should be able to get all snack', async () => {
     const { token } = await createAndAuthenticateUser(app)
 
     await request(app.server)
