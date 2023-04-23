@@ -6,6 +6,7 @@ import { edit } from './edit'
 import { deleteSnack } from './delete'
 import { getAllUserSnack } from './get-all-user-snack'
 import { getUserMetrics } from './get-user-metrics'
+import { getOnlySnack } from './get-only-snack'
 
 export async function snacksRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJwt)
@@ -16,4 +17,5 @@ export async function snacksRoutes(app: FastifyInstance) {
 
   app.get('/snacks/get-all-user-snack', getAllUserSnack)
   app.get('/snacks/get-user-metrics', getUserMetrics)
+  app.get('/snacks/get-only-snack', getOnlySnack)
 }
