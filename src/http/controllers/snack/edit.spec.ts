@@ -36,7 +36,6 @@ describe('Edit snacks (e2e)', () => {
         name: 'Salgadinho',
         description: 'doritos',
         insideDiet: true,
-        userId: user.id,
       })
 
     expect(response.statusCode).toEqual(200)
