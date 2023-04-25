@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "API para controle de dieta diária, a Daily Diet API.",
   "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
@@ -28,6 +31,7 @@
     "bcryptjs": "2.4.3",
     "dotenv": "16.0.3",
     "fastify": "4.15.0",
+    "pg": "8.10.0",
     "zod": "3.21.4"
   },
   "devDependencies": {
