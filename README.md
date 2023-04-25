@@ -21,7 +21,7 @@ Daily Diet app.
       - [x] Quantidade total de refeições dentro da dieta
       - [x] Quantidade total de refeições fora da dieta
       - [/] Melhor sequência por dia de refeições dentro da dieta
-- [ ] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou;
+- [x] O usuário só pode visualizar, editar e apagar as refeições o qual ele criou;
 
 ## RNs (Regras de negócio)
 
@@ -31,4 +31,4 @@ Daily Diet app.
 - [x] A senha do usuário precisa estar criptografada;
 - [x] Os dados da aplicação precisam estar persistidos em um banco PostgreSQL;
 - [ ] Todas listas de dados precisam estar paginadas com 20 itens por página;
-- [ ] O usuário deve ser identificado por um JWT (JSON Web Token);****
+- [x] O usuário deve ser identificado por um JWT (JSON Web Token);****
